@@ -27,7 +27,7 @@ const main = async() => {
             axios.get(url).then(response => {
                 console.log(`Response code of url - ${url} : ${response.status}`);
                 success = codesAllowedArr.includes(response.status);
-            }).error(error => {
+            }).catch(function (error) {
                 console.log(`error accessing url: ${url} - error: ${error}`);
                 success = false;
             });
