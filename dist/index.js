@@ -4794,6 +4794,7 @@ const main = async() => {
             axios.get(url).then(response => {
                 console.log(`Response code of url - ${url} : ${response.status}`);
                 failed = !codesAllowedArr.includes(response.status);
+                console.log(`Failed: ${failed}`);
             }).catch(function (error) {
                 console.log(`error accessing url: ${url} - error: ${error}`);
                 failed = true;
@@ -4802,7 +4803,8 @@ const main = async() => {
             await sleep(retryDelay);
         } while(retryCount-- > 0);
 
-        if(failed) {
+        console.log(`Failed: ${failed}`);
+        if(failed === true) {
             core.setFailed('Failed to access url');
         }
     } catch (error) {
