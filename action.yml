@@ -23,7 +23,6 @@ inputs:
   codes-allowed:
     description: List of HTTP response codes that are acceptable/allowed. Separate them by ',' (commas).
     required: false
-    default: 200
 runs:
   using: 'node16'
   main: 'dist/index.js'
