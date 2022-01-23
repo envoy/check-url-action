@@ -23,7 +23,7 @@ const main = async() => {
             axios.get(url).then(response => {
                 console.log(`Response code of url - ${url} : ${response.status}`);
                 failed = !codesAllowedArr.includes(response.status);
-                console.log(`Failed: ${failed}`);
+                console.log(`inside do while - Failed: ${failed}`);
             }).catch(function (error) {
                 console.log(`error accessing url: ${url} - error: ${error}`);
                 failed = true;
@@ -32,8 +32,9 @@ const main = async() => {
             await sleep(retryDelay);
         } while(retryCount-- > 0);
 
-        console.log(`Failed: ${failed}`);
+        console.log(`outside do while - Failed: ${failed}`);
         if(failed === true) {
+            console.log(`inside if - Failed: ${failed}`);
             core.setFailed('Failed to access url');
         }
     } catch (error) {
