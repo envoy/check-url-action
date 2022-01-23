@@ -20,7 +20,7 @@ const main = async() => {
         var failed = true;
 
         do {
-            axios.get(url).then(response => {
+            await axios.get(url).then(response => {
                 console.log(`Response code of url - ${url} : ${response.status}`);
                 failed = !codesAllowedArr.includes(response.status);
                 console.log(`inside do while - Failed: ${failed}`);
