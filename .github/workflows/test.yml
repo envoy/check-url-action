@@ -11,4 +11,4 @@ jobs:
       - name: Test URL
         uses: envoy/check-url-action@main
         with:
-          url: https://google.com
+          url: https://abcd.com/
