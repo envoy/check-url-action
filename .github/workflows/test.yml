@@ -1,0 +1,14 @@
+name: Test CI
+
+on: pull_request
+
+jobs:
+  test-ci:
+    name: Test CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test URL
+        uses: envoy/check-url-action@v1.0.0
+        with:
+          url: https://google.com
