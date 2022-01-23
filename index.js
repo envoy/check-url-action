@@ -21,22 +21,15 @@ const main = async() => {
 
         do {
             await axios.get(url).then(response => {
-                console.log(`Response code of url - ${url} : ${response.status}`);
                 failed = !codesAllowedArr.includes(response.status);
-                console.log(`inside do while - Failed: ${failed}`);
             }).catch(function (error) {
-                console.log(`error accessing url: ${url} - error: ${error}`);
-                failed = true;
+                console.log(`Error accessing url: ${error.message}`);
             });
 
             await sleep(retryDelay);
-        } while(retryCount-- > 0);
+        } while(retryCount-- > 0 && failed);
 
-        console.log(`outside do while - Failed: ${failed}`);
-        if(failed === true) {
-            console.log(`inside if - Failed: ${failed}`);
-            core.setFailed('Failed to access url');
-        }
+        failed && core.setFailed('Failed to access url');
     } catch (error) {
         core.setFailed(error.message);
     }
