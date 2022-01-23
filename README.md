@@ -6,10 +6,10 @@ Github Action to validate and check URL response status and code
 Name | Description | Required
 --- | --- | ---
 `url` | URL path to verify | `true`
-`init-delay` | Initial delay before probing the URL (in milliseconds). Max allowed initial delay is 30s | `false`
-`retry-count` | Number of retries permitted. Max allowed retry is 5 | `false`
-`retry-delay` | Amount of time to wait before retrying the activity (in milliseconds). Max allowed delay is 30s | `false`
-`codes-allowed` | List of HTTP response codes that are acceptable/allowed. Separate them by ',' (commas) | `false`
+`init-delay` | Initial delay before probing the `URL` (in milliseconds). Max allowed initial delay is `30s` | `false`
+`retry-count` | Number of retries permitted. Max allowed retry is `5` | `false`
+`retry-delay` | Amount of time to wait before retrying the activity (in milliseconds). Max allowed delay is `30s` | `false`
+`codes-allowed` | List of `HTTP` response codes that are allowed. Separate them by `','` (commas) | `false`
 
 ## Example Usage
 
