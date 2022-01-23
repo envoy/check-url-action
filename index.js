@@ -17,7 +17,7 @@ const main = async() => {
         const codesAllowedArr = codesAllowed.split(',').map(Number);
 
         await sleep(initDelay);
-        let failed = true;
+        var failed = true;
 
         do {
             axios.get(url).then(response => {
@@ -31,9 +31,7 @@ const main = async() => {
             await sleep(retryDelay);
         } while(retryCount-- > 0);
 
-        if(failed) {
-            core.setFailed('Failed to access url');
-        }
+        failed && core.setFailed('Failed to access url');
     } catch (error) {
         core.setFailed(error.message);
     }
