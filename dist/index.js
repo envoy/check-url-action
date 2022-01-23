@@ -4803,7 +4803,7 @@ const main = async() => {
                 success = false;
             });
 
-            await sleep(retryDelay); 
+            await sleep(retryDelay);
         } while(retryCount-- > 0);
 
         !success && core.setFailed('Failed to access url');
