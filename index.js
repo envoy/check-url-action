@@ -6,19 +6,15 @@ const main = async() => {
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
         const url = core.getInput('url', {required: true});
-        const initDelayStr = core.getInput('init-delay', {required: false});
-        const retryCountStr = core.getInput('retry-count', {required: false});
-        const retryDelayStr = core.getInput('retry-delay', {required: false});
-        const codesAllowed = core.getInput('codes-allowed', {required: false});
+        const initDelayStr = core.getInput('init-delay', {required: true});
+        const retryCountStr = core.getInput('retry-count', {required: true});
+        const retryDelayStr = core.getInput('retry-delay', {required: true});
+        const codesAllowed = core.getInput('codes-allowed', {required: true});
 
-        let initDelay = initDelayStr ? parseInt(initDelayStr) : 0;
-        let retryCount = retryCountStr ? parseInt(retryCountStr) : 0;
-        let retryDelay = retryDelayStr ? parseInt(retryDelayStr) : 0;
-        const codesAllowedArr = codesAllowed ? codesAllowed.split(',').map(Number) : [200];
-
-        initDelay = initDelay > 30000 ? 30000 : initDelay;
-        retryCount = retryCount > 5 ? 5 : retryCount;
-        retryDelay = retryDelay > 30000 ? 30000 : retryDelay;
+        const initDelay = parseInt(initDelayStr) > 30000 ? 30000 : parseInt(initDelayStr);
+        const retryCount = parseInt(retryCountStr) > 5 ? 5 : parseInt(retryCountStr);
+        const retryDelay = parseInt(retryDelayStr) > 30000 ? 30000 : parseInt(retryDelayStr);
+        const codesAllowedArr = codesAllowed.split(',').map(Number);
 
         await sleep(initDelay);
         let failed = true;
