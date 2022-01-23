@@ -4792,21 +4792,23 @@ const main = async() => {
         retryDelay = retryDelay > 30000 ? 30000 : retryDelay;
 
         await sleep(initDelay);
-        let success = false;
+        let failed = true;
 
         do {
             axios.get(url).then(response => {
                 console.log(`Response code of url - ${url} : ${response.status}`);
-                success = codesAllowedArr.includes(response.status);
+                failed = !codesAllowedArr.includes(response.status);
             }).catch(function (error) {
                 console.log(`error accessing url: ${url} - error: ${error}`);
-                success = false;
+                failed = true;
             });
 
             await sleep(retryDelay);
         } while(retryCount-- > 0);
 
-        if(!success) core.setFailed('Failed to access url');
+        if(failed) {
+            core.setFailed('Failed to access url');
+        }
     } catch (error) {
         core.setFailed(error.message);
     }
