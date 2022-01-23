@@ -9,6 +9,6 @@ jobs:
 
     steps:
       - name: Test URL
-        uses: envoy/check-url-action@v1.0.0
+        uses: envoy/check-url-action@main
         with:
           url: https://google.com
