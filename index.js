@@ -15,7 +15,6 @@ const main = async() => {
         let retryCount = retryCountStr ? parseInt(retryCountStr) : 0;
         let retryDelay = retryDelayStr ? parseInt(retryDelayStr) : 0;
         const codesAllowedArr = codesAllowed ? codesAllowed.split(',').map(Number) : [200];
-        console.log(`codesAllowedArr: ${codesAllowedArr}`);
 
         initDelay = initDelay > 30000 ? 30000 : initDelay;
         retryCount = retryCount > 5 ? 5 : retryCount;
@@ -28,7 +27,6 @@ const main = async() => {
             axios.get(url).then(response => {
                 console.log(`Response code of url - ${url} : ${response.status}`);
                 success = codesAllowedArr.includes(response.status);
-                console.log(`Success - ${success}`);
             }).catch(function (error) {
                 console.log(`error accessing url: ${url} - error: ${error}`);
                 success = false;
@@ -37,7 +35,7 @@ const main = async() => {
             await sleep(retryDelay);
         } while(retryCount-- > 0);
 
-        !success && core.setFailed('Failed to access url');
+        if(!success) core.setFailed('Failed to access url');
     } catch (error) {
         core.setFailed(error.message);
     }
