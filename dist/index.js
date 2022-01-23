@@ -4783,7 +4783,7 @@ const main = async() => {
         const codesAllowed = core.getInput('codes-allowed', {required: true});
 
         const initDelay = parseInt(initDelayStr) > 30000 ? 30000 : parseInt(initDelayStr);
-        const retryCount = parseInt(retryCountStr) > 5 ? 5 : parseInt(retryCountStr);
+        var retryCount = parseInt(retryCountStr) > 5 ? 5 : parseInt(retryCountStr);
         const retryDelay = parseInt(retryDelayStr) > 30000 ? 30000 : parseInt(retryDelayStr);
         const codesAllowedArr = codesAllowed.split(',').map(Number);
 
@@ -4802,7 +4802,9 @@ const main = async() => {
             await sleep(retryDelay);
         } while(retryCount-- > 0);
 
-        failed && core.setFailed('Failed to access url');
+        if(failed) {
+            core.setFailed('Failed to access url');
+        }
     } catch (error) {
         core.setFailed(error.message);
     }
